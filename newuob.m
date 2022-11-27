@@ -112,7 +112,7 @@ function [NF, X] = newuob(Func, N, NPT, X, RHOBEG, RHOEND, IPRINT, MAXFUN)
   NF = 0;
   flag = 50;
 
-  while (flag ~= 530)
+  while (flag ~= 1111)
     switch flag
       case 50
         NFM = NF;
@@ -457,11 +457,11 @@ function [NF, X] = newuob(Func, N, NPT, X, RHOBEG, RHOEND, IPRINT, MAXFUN)
           % disp(['FBEG-test =', num2str(FBEG)])
           % disp(['F-test =', num2str(F)])
           % disp(['FOPT-test =', num2str(FOPT)])
-          if (IPRINT == 3)
-            disp(['Function number ', num2str(NF), '; F =', num2str(F)])
-            disp('The corresponding X array is:')
-            disp(X)
-          end
+          % if (IPRINT == 3)
+          %   disp(['Function number ', num2str(NF), '; F =', num2str(F)])
+          %   disp('The corresponding X array is:')
+          %   disp(X)
+          % end
           if (NF <= NPT)
             flag = 70;
           elseif (KNEW == -1)
@@ -723,7 +723,7 @@ function [NF, X] = newuob(Func, N, NPT, X, RHOBEG, RHOEND, IPRINT, MAXFUN)
 
       case 490
         if (RHO > RHOEND)
-          disp(['kankan RHO:', num2str(RHO), ', kankan Delta:', num2str(DELTA)])
+          % disp(['kankan RHO:', num2str(RHO), ', kankan Delta:', num2str(DELTA)])
           DELTA = HALF * RHO;
           RATIO = RHO / RHOEND;
           if (RATIO <= 16.0e0)
@@ -734,18 +734,18 @@ function [NF, X] = newuob(Func, N, NPT, X, RHOBEG, RHOEND, IPRINT, MAXFUN)
             RHO = TENTH * RHO;
           end
           DELTA = max(DELTA, RHO);
-          if (IPRINT >= 2)
-            if (IPRINT >= 3)
-              disp("(5X)")
-            end
-            disp(['New RHO =', num2str(RHO), ', Current number of function evaluations =', num2str(NF)])
-            disp(['Least value of F = ', num2str(FOPT), ', The corresponding X array is:']); disp(XBASE + XOPT)
-          end
+          % if (IPRINT >= 2)
+          %   if (IPRINT >= 3)
+          %     disp("(5X)")
+          %   end
+          %   disp(['New RHO =', num2str(RHO), ', Current number of function evaluations =', num2str(NF)])
+          %   disp(['Least value of F = ', num2str(FOPT), ', The corresponding X array is:']); disp(XBASE + XOPT)
+          % end
           flag = 90;
         else
           %     return from the calculation, after another Newton-Raphson step, if
           %     it is too short to have been tried before.
-          disp(['NF = ', num2str(NF)])
+          % disp(['NF = ', num2str(NF)])
           if (KNEW == -1)
             flag = 290;
           else
@@ -761,12 +761,13 @@ function [NF, X] = newuob(Func, N, NPT, X, RHOBEG, RHOEND, IPRINT, MAXFUN)
           end
           F = FOPT;
         end
-        if (IPRINT >= 1)
-          disp('At the return from NEWUOA ')
-          disp(['Total times of function evaluations =', num2str(NF)])
-          disp(['Least value of F =', num2str(F)])
-          disp('The corresponding X array is:'); disp(X)
-        end
+        % if (IPRINT >= 1)
+        %   disp('At the return from NEWUOA ')
+        %   disp(['Total times of function evaluations =', num2str(NF)])
+        %   disp(['Least value of F =', num2str(F)])
+        %   disp('The corresponding X array is:'); disp(X)
+        % end
+        flag = 1111;
     end
   end
 
